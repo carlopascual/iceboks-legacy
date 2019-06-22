@@ -6,25 +6,32 @@
     "description": ""
   },
   "options": {
-    "timestamps": ["createdAt", "updatedAt"]
+    "timestamps": [
+      "createdAt",
+      "updatedAt"
+    ]
   },
   "attributes": {
-    "metadataTitle": {
-      "type": "string"
-    },
-    "metadataDescription": {
-      "type": "text"
-    },
-    "metadataImage": {
-      "model": "file",
-      "via": "related",
-      "plugin": "upload"
-    },
     "url": {
       "type": "string"
     },
     "review": {
       "type": "text"
+    },
+    "metadata": {
+      "type": "json"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "string"
+    },
+    "sitename": {
+      "type": "string"
     }
   }
 }

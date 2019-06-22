@@ -1,4 +1,6 @@
-'use strict';
+"use strict";
+
+const urlMetadata = require("url-metadata");
 
 /**
  * Lifecycle callbacks for the `Post` model.
@@ -30,9 +32,17 @@ module.exports = {
 
   // Before creating a value.
   // Fired before an `insert` query.
-  beforeCreate: async (model) => {
-    console.log(model)
-  },
+  beforeCreate: async model => {
+    console.log(model);
+
+    const metadata = await urlMetadata(model.url);
+
+    model.metadata = metadata;
+    model.sitename = metadata["og:site_name"];
+    model.title = metadata.title;
+    model.description = metadata.description;
+    model.image = metadata.image;
+  }
 
   // After creating a value.
   // Fired after an `insert` query.

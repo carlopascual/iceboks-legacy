@@ -65,11 +65,13 @@ input editFileInput {
 }
 
 input editPostInput {
-  metadataTitle: String
-  metadataDescription: String
-  metadataImage: ID
   url: String
   review: String
+  metadata: JSON
+  title: String
+  description: String
+  image: String
+  sitename: String
 }
 
 input editRoleInput {
@@ -113,7 +115,7 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Post | createPostPayload | updatePostPayload | deletePostPayload | PostConnection | PostAggregator | PostGroupBy | PostConnection_id | PostConnectionId | PostConnectionCreatedAt | PostConnectionUpdatedAt | PostConnectionMetadataTitle | PostConnectionMetadataDescription | PostConnectionMetadataImage | PostConnectionUrl | PostConnectionReview | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Post | createPostPayload | updatePostPayload | deletePostPayload | PostConnection | PostAggregator | PostGroupBy | PostConnection_id | PostConnectionId | PostConnectionCreatedAt | PostConnectionUpdatedAt | PostConnectionUrl | PostConnectionReview | PostConnectionMetadata | PostConnectionTitle | PostConnectionDescription | PostConnectionImage | PostConnectionSitename | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
 
 type Mutation {
   createPost(input: createPostInput): createPostPayload
@@ -145,11 +147,13 @@ type Post {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  metadataTitle: String
-  metadataDescription: String
-  metadataImage: UploadFile
   url: String
   review: String
+  metadata: JSON
+  title: String
+  description: String
+  image: String
+  sitename: String
 }
 
 type PostAggregator {
@@ -173,27 +177,37 @@ type PostConnectionCreatedAt {
   connection: PostConnection
 }
 
+type PostConnectionDescription {
+  key: String
+  connection: PostConnection
+}
+
 type PostConnectionId {
   key: ID
   connection: PostConnection
 }
 
-type PostConnectionMetadataDescription {
+type PostConnectionImage {
   key: String
   connection: PostConnection
 }
 
-type PostConnectionMetadataImage {
-  key: ID
-  connection: PostConnection
-}
-
-type PostConnectionMetadataTitle {
-  key: String
+type PostConnectionMetadata {
+  key: JSON
   connection: PostConnection
 }
 
 type PostConnectionReview {
+  key: String
+  connection: PostConnection
+}
+
+type PostConnectionSitename {
+  key: String
+  connection: PostConnection
+}
+
+type PostConnectionTitle {
   key: String
   connection: PostConnection
 }
@@ -213,19 +227,23 @@ type PostGroupBy {
   id: [PostConnectionId]
   createdAt: [PostConnectionCreatedAt]
   updatedAt: [PostConnectionUpdatedAt]
-  metadataTitle: [PostConnectionMetadataTitle]
-  metadataDescription: [PostConnectionMetadataDescription]
-  metadataImage: [PostConnectionMetadataImage]
   url: [PostConnectionUrl]
   review: [PostConnectionReview]
+  metadata: [PostConnectionMetadata]
+  title: [PostConnectionTitle]
+  description: [PostConnectionDescription]
+  image: [PostConnectionImage]
+  sitename: [PostConnectionSitename]
 }
 
 input PostInput {
-  metadataTitle: String
-  metadataDescription: String
-  metadataImage: ID
   url: String
   review: String
+  metadata: JSON
+  title: String
+  description: String
+  image: String
+  sitename: String
 }
 
 type Query {
