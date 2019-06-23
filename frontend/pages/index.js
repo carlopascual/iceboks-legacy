@@ -1,9 +1,11 @@
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import _ from "lodash";
+import Post from "../components/post";
 
 const Component = ({ data }) => (
   <div>
+    <Post />
     {!data.loading &&
       _.map(
         data.posts,
