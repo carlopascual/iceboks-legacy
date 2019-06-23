@@ -1,3 +1,77 @@
+type Category {
+  _id: ID!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  description: String
+  posts(sort: String, limit: Int, start: Int, where: JSON): [Post]
+}
+
+type CategoryAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type CategoryConnection {
+  values: [Category]
+  groupBy: CategoryGroupBy
+  aggregate: CategoryAggregator
+}
+
+type CategoryConnection_id {
+  key: ID
+  connection: CategoryConnection
+}
+
+type CategoryConnectionCreatedAt {
+  key: DateTime
+  connection: CategoryConnection
+}
+
+type CategoryConnectionDescription {
+  key: String
+  connection: CategoryConnection
+}
+
+type CategoryConnectionId {
+  key: ID
+  connection: CategoryConnection
+}
+
+type CategoryConnectionTitle {
+  key: String
+  connection: CategoryConnection
+}
+
+type CategoryConnectionUpdatedAt {
+  key: DateTime
+  connection: CategoryConnection
+}
+
+type CategoryGroupBy {
+  _id: [CategoryConnection_id]
+  id: [CategoryConnectionId]
+  createdAt: [CategoryConnectionCreatedAt]
+  updatedAt: [CategoryConnectionUpdatedAt]
+  title: [CategoryConnectionTitle]
+  description: [CategoryConnectionDescription]
+}
+
+input CategoryInput {
+  title: String
+  description: String
+  posts: [ID]
+}
+
+input createCategoryInput {
+  data: CategoryInput
+}
+
+type createCategoryPayload {
+  category: Category
+}
+
 input createPostInput {
   data: PostInput
 }
@@ -27,6 +101,14 @@ The `DateTime` scalar represents a date and time following the ISO 8601 standard
 """
 scalar DateTime
 
+input deleteCategoryInput {
+  where: InputID
+}
+
+type deleteCategoryPayload {
+  category: Category
+}
+
 input deletePostInput {
   where: InputID
 }
@@ -51,6 +133,12 @@ type deleteUserPayload {
   user: UsersPermissionsUser
 }
 
+input editCategoryInput {
+  title: String
+  description: String
+  posts: [ID]
+}
+
 input editFileInput {
   name: String
   hash: String
@@ -72,6 +160,7 @@ input editPostInput {
   description: String
   image: String
   sitename: String
+  categories: [ID]
 }
 
 input editRoleInput {
@@ -115,9 +204,12 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Post | createPostPayload | updatePostPayload | deletePostPayload | PostConnection | PostAggregator | PostGroupBy | PostConnection_id | PostConnectionId | PostConnectionCreatedAt | PostConnectionUpdatedAt | PostConnectionUrl | PostConnectionReview | PostConnectionMetadata | PostConnectionTitle | PostConnectionDescription | PostConnectionImage | PostConnectionSitename | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Category | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnection_id | CategoryConnectionId | CategoryConnectionCreatedAt | CategoryConnectionUpdatedAt | CategoryConnectionTitle | CategoryConnectionDescription | Post | createPostPayload | updatePostPayload | deletePostPayload | PostConnection | PostAggregator | PostGroupBy | PostConnection_id | PostConnectionId | PostConnectionCreatedAt | PostConnectionUpdatedAt | PostConnectionUrl | PostConnectionReview | PostConnectionMetadata | PostConnectionTitle | PostConnectionDescription | PostConnectionImage | PostConnectionSitename | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
 
 type Mutation {
+  createCategory(input: createCategoryInput): createCategoryPayload
+  updateCategory(input: updateCategoryInput): updateCategoryPayload
+  deleteCategory(input: deleteCategoryInput): deleteCategoryPayload
   createPost(input: createPostInput): createPostPayload
   updatePost(input: updatePostInput): updatePostPayload
   deletePost(input: deletePostInput): deletePostPayload
@@ -154,6 +246,7 @@ type Post {
   description: String
   image: String
   sitename: String
+  categories(sort: String, limit: Int, start: Int, where: JSON): [Category]
 }
 
 type PostAggregator {
@@ -244,9 +337,13 @@ input PostInput {
   description: String
   image: String
   sitename: String
+  categories: [ID]
 }
 
 type Query {
+  category(id: ID!): Category
+  categories(sort: String, limit: Int, start: Int, where: JSON): [Category]
+  categoriesConnection(sort: String, limit: Int, start: Int, where: JSON): CategoryConnection
   post(id: ID!): Post
   posts(sort: String, limit: Int, start: Int, where: JSON): [Post]
   postsConnection(sort: String, limit: Int, start: Int, where: JSON): PostConnection
@@ -271,6 +368,15 @@ input RoleInput {
   type: String
   permissions: [ID]
   users: [ID]
+}
+
+input updateCategoryInput {
+  where: InputID
+  data: editCategoryInput
+}
+
+type updateCategoryPayload {
+  category: Category
 }
 
 input updatePostInput {
