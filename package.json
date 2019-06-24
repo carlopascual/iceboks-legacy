@@ -24,6 +24,7 @@
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.12",
     "babel-plugin-emotion": "^10.0.13",
+    "babel-plugin-root-import": "^6.2.0",
     "emotion": "^10.0.9",
     "gql": "^1.1.2",
     "graphql": "^14.3.1",
