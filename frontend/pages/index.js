@@ -15,6 +15,10 @@ export default graphql(
         title
         description
         image
+        url
+        categories {
+          title
+        }
       }
     }
   `,
