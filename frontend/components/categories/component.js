@@ -9,6 +9,18 @@ const Outline = styled.div`
   justify-content: center;
   align-items: center;
   height: 41px;
+
+  @media (min-width: ${breakpoints.tablet + 1}px) {
+    .filters {
+      display: none;
+    }
+  }
+
+  @media (max-width: ${breakpoints.tablet}px) {
+    .categories {
+      display: none;
+    }
+  }
 `;
 
 const Sorting = styled.button`
@@ -60,12 +72,16 @@ const Category = styled.button`
 const Component = ({ loading, categories, style }) => (
   <Outline style={style}>
     <Sorting style={{ position: "absolute", left: 0 }}>Popular</Sorting>
-    <div>
+    <div className="categories">
+      <Category style={{ margin: "0 3px" }}>All</Category>
+
       {_.map(categories, category => (
         <Category style={{ margin: "0 3px" }}>{category.title}</Category>
       ))}
     </div>
-    <Sorting style={{ position: "absolute", right: 0 }}>Filters</Sorting>
+    <Sorting className="filters" style={{ position: "absolute", right: 0 }}>
+      Filters
+    </Sorting>
   </Outline>
 );
 
