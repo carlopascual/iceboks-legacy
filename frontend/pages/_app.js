@@ -13,6 +13,7 @@ class MyApp extends App {
         <Global
           styles={css`
             body {
+              margin: 0px 20px 20px;
               font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                 Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
                 "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
