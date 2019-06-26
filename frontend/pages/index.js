@@ -3,6 +3,7 @@ import _ from "lodash";
 import { graphql } from "react-apollo";
 import styled from "@emotion/styled";
 import Post from "~/components/post";
+import Categories from "~/components/categories";
 import { Header } from "~/components/layout";
 import { breakpoints } from "~/breakpoints";
 
@@ -17,6 +18,7 @@ const Outline = styled.div`
 const Component = ({ data }) => (
   <>
     <Header />
+    <Categories style={{ marginBottom: "20px" }} />
     <Outline>
       {!data.loading && _.map(data.posts, post => <Post {...post} />)}
     </Outline>
