@@ -1,5 +1,6 @@
 import _ from "lodash";
 import styled from "@emotion/styled";
+import { breakpoints } from "~/breakpoints";
 import decode from "ent/decode";
 import { PRIMARY, BLACK_5, BLACK_25 } from "~/styles";
 
@@ -12,6 +13,17 @@ const Outline = styled.div`
 
   &:hover {
     background: ${BLACK_5};
+  }
+
+  @media (max-width: ${breakpoints.mobile}px) {
+    padding: 0px;
+
+    &:hover {
+      background: initial;
+    }
+    .preview {
+      display: none;
+    }
   }
 `;
 
@@ -55,7 +67,7 @@ const Component = ({
       <Url style={{ marginTop: "6px" }}>{url}</Url>
     </div>
     {console.log(props)}
-    <img style={{ height: "108px" }} src={image} />
+    <img className="preview" style={{ height: "108px" }} src={image} />
   </Outline>
 );
 

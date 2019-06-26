@@ -1,13 +1,25 @@
 import gql from "graphql-tag";
-import { graphql } from "react-apollo";
 import _ from "lodash";
+import { graphql } from "react-apollo";
+import styled from "@emotion/styled";
 import Post from "~/components/post";
 import { Header } from "~/components/layout";
+import { breakpoints } from "~/breakpoints";
+
+const Outline = styled.div`
+  display: grid;
+
+  @media (max-width: ${breakpoints.mobile}px) {
+    grid-row-gap: 50px;
+  }
+`;
 
 const Component = ({ data }) => (
   <>
     <Header />
-    <div>{!data.loading && _.map(data.posts, post => <Post {...post} />)}</div>
+    <Outline>
+      {!data.loading && _.map(data.posts, post => <Post {...post} />)}
+    </Outline>
   </>
 );
 
