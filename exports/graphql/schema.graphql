@@ -160,6 +160,7 @@ input editPostInput {
   description: String
   image: String
   sitename: String
+  favicon: String
   categories: [ID]
 }
 
@@ -204,7 +205,7 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Category | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnection_id | CategoryConnectionId | CategoryConnectionCreatedAt | CategoryConnectionUpdatedAt | CategoryConnectionTitle | CategoryConnectionDescription | Post | createPostPayload | updatePostPayload | deletePostPayload | PostConnection | PostAggregator | PostGroupBy | PostConnection_id | PostConnectionId | PostConnectionCreatedAt | PostConnectionUpdatedAt | PostConnectionUrl | PostConnectionReview | PostConnectionMetadata | PostConnectionTitle | PostConnectionDescription | PostConnectionImage | PostConnectionSitename | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Category | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnection_id | CategoryConnectionId | CategoryConnectionCreatedAt | CategoryConnectionUpdatedAt | CategoryConnectionTitle | CategoryConnectionDescription | Post | createPostPayload | updatePostPayload | deletePostPayload | PostConnection | PostAggregator | PostGroupBy | PostConnection_id | PostConnectionId | PostConnectionCreatedAt | PostConnectionUpdatedAt | PostConnectionUrl | PostConnectionReview | PostConnectionMetadata | PostConnectionTitle | PostConnectionDescription | PostConnectionImage | PostConnectionSitename | PostConnectionFavicon | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
 
 type Mutation {
   createCategory(input: createCategoryInput): createCategoryPayload
@@ -246,6 +247,7 @@ type Post {
   description: String
   image: String
   sitename: String
+  favicon: String
   categories(sort: String, limit: Int, start: Int, where: JSON): [Category]
 }
 
@@ -271,6 +273,11 @@ type PostConnectionCreatedAt {
 }
 
 type PostConnectionDescription {
+  key: String
+  connection: PostConnection
+}
+
+type PostConnectionFavicon {
   key: String
   connection: PostConnection
 }
@@ -327,6 +334,7 @@ type PostGroupBy {
   description: [PostConnectionDescription]
   image: [PostConnectionImage]
   sitename: [PostConnectionSitename]
+  favicon: [PostConnectionFavicon]
 }
 
 input PostInput {
@@ -337,6 +345,7 @@ input PostInput {
   description: String
   image: String
   sitename: String
+  favicon: String
   categories: [ID]
 }
 

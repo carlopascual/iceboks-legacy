@@ -6,10 +6,7 @@
     "description": ""
   },
   "options": {
-    "timestamps": [
-      "createdAt",
-      "updatedAt"
-    ]
+    "timestamps": ["createdAt", "updatedAt"]
   },
   "attributes": {
     "url": {
@@ -31,6 +28,9 @@
       "type": "string"
     },
     "sitename": {
+      "type": "string"
+    },
+    "favicon": {
       "type": "string"
     },
     "categories": {

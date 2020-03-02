@@ -1,6 +1,7 @@
 "use strict";
 
 const urlMetadata = require("url-metadata");
+const getFavicons = require("get-website-favicon");
 
 /**
  * Lifecycle callbacks for the `Post` model.
@@ -42,6 +43,10 @@ module.exports = {
     model.title = metadata.title;
     model.description = metadata.description;
     model.image = metadata.image;
+
+    const favicon = await getFavicons(model.url);
+
+    model.favicon = favicon.icons[0].src;
   }
 
   // After creating a value.
