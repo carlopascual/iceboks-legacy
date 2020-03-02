@@ -1,6 +1,8 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { breakpoints } from "~/breakpoints";
-import { BLACK, BLACK_10 } from "~/styles";
+import { WHITE, BLACK, BLACK_10 } from "~/styles";
+import Sidebar from "./sidebar";
 
 const Outline = styled.div`
   padding: 30px 0;
@@ -44,17 +46,26 @@ const Recommendation = ({ ...props }) => (
   </p>
 );
 
-const Component = () => (
-  <>
-    <Outline className="header-outline">
-      <img src="/static/logo.svg" className="logo" />
-      <Divider className="desktop" />
-      <p style={{ color: BLACK }} className="recommendation">
-        Free resources library. Know an awesome resource? Get in touch ✍️
-      </p>
-      <img src="/static/burger.svg" className="menu" />
-    </Outline>
-  </>
-);
+const Component = () => {
+  const [showSidebar, setShowSidebar] = useState(false);
+  return (
+    <>
+      <Outline className="header-outline">
+        <img src="/static/logo.svg" className="logo" />
+        <Divider className="desktop" />
+        <p style={{ color: BLACK }} className="recommendation">
+          Free resources library. Know an awesome resource? Get in touch ✍️
+        </p>
+        <img
+          src="/static/burger.svg"
+          className="menu"
+          style={{ cursor: "pointer" }}
+          onClick={() => setShowSidebar(true)}
+        />
+        {showSidebar && <Sidebar />}
+      </Outline>
+    </>
+  );
+};
 
 export default Component;
