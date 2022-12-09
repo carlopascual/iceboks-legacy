@@ -40,7 +40,7 @@
     "react-apollo": "^2.5.8",
     "react-dom": "^16.8.6",
     "recompose": "^0.30.0",
-    "strapi": "3.0.0-beta.6",
+    "strapi": "3.6.11",
     "strapi-admin": "3.0.0-beta.6",
     "strapi-hook-mongoose": "3.0.0-beta.6",
     "strapi-plugin-content-manager": "3.0.0-beta.6",
@@ -49,7 +49,7 @@
     "strapi-plugin-graphql": "3.0.0-beta.6",
     "strapi-plugin-settings-manager": "3.0.0-beta.6",
     "strapi-plugin-upload": "3.0.0-beta.6",
-    "strapi-plugin-users-permissions": "3.0.0-beta.6",
+    "strapi-plugin-users-permissions": "3.6.11",
     "strapi-utils": "3.0.0-beta.6",
     "url-metadata": "^2.4.0"
   },
